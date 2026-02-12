@@ -1,0 +1,268 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Poppins Font  */
+@font-face {
+  font-family: "Poppins";
+  src: url("./assets/fonts/Poppins-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./assets/fonts/Poppins-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./assets/fonts/Poppins-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+
+:root {
+  font-size: 62.5%;
+  /* Primary Colors */
+  --purple-500: hsl(259, 100%, 65%);
+  --red-400: hsl(0, 100%, 67%);
+  /* Neutral Colors */
+  --white: hsl(0, 100%, 100%);
+  --grey-100: hsl(0, 0%, 94%);
+  --grey-200: hsl(0, 0%, 86%);
+  --grey-500: hsl(0, 1%, 44%);
+  --black: hsl(0, 0%, 0%);
+}
+/* 400 700 800 */
+body {
+  font-size: 3.2rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  background-color: var(--grey-100);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  position: relative;
+}
+
+.form-container {
+  background-color: var(--white);
+  width: 60rem;
+  max-width: 95%;
+  padding: 4.5rem;
+  border-radius: 2rem 2rem 16rem 2rem;
+}
+#results h1 {
+  font-size: 6.5rem; /* Large impact numbers */
+  font-size: clamp(3rem, 10vw, 6rem);
+  font-weight: 800; /* Use the ExtraBold you imported */
+  font-style: italic;
+  line-height: 1.1;
+  color: var(--black);
+}
+
+#results span {
+  color: var(--purple-500); /* Purple numbers */
+  letter-spacing: 0.5rem;
+}
+
+.input-row {
+  display: flex;
+  gap: 3rem; /* Adjust space between Day, Month, Year */
+  margin-bottom: 2rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  max-width: 12rem;
+}
+
+.input-group label {
+  font-size: clamp(1rem, 10vw, 1.5rem);
+  text-transform: uppercase;
+  letter-spacing: 0.3rem;
+  color: var(--grey-500);
+  margin-bottom: 0.8rem;
+  font-weight: 700; /* Bold weight */
+}
+
+input {
+  width: 100%;
+  padding: 1.2rem 2rem;
+  font-size: clamp(0.8rem, 10vw, 2.2rem);
+  font-family: inherit;
+  font-weight: 700;
+  border: 1px solid var(--grey-200);
+  border-radius: 0.8rem;
+  outline: none;
+}
+
+input:focus {
+  border-color: var(--purple-500);
+}
+
+/* Removes the spin buttons on number inputs */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* 1. Change the Label to Red */
+.input-group.error label {
+  color: var(--red-400);
+}
+
+/* 2. Change the Input Border to Red */
+.input-group.error input {
+  border-color: var(--red-400);
+}
+.input-group.error input:focus {
+  border-color: var(--red-400); /* Keeps it red even when clicking */
+}
+/* 3. Style the Error Message Text */
+.error-msg {
+  color: var(--red-400);
+  font-size: 1.2rem;
+  font-style: italic;
+  font-weight: 400;
+  margin-top: 0.5rem;
+  min-height: 1.5rem; /* Prevents the card from jumping when text appears */
+  display: block;
+}
+.divider-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin: 40px 0; /* Space between inputs and results */
+}
+
+.line {
+  width: 100%;
+  border: 0;
+  border-top: 1px solid #dbdbdb; /* Light grey color from design */
+}
+
+.submit-btn {
+  background-color: var(--purple-500); /* Poppins purple */
+  border: none;
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  cursor: pointer;
+  position: absolute;
+  right: 0; /* Moves it to the far right */
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #141414; /* Turns black on hover */
+}
+
+.submit-btn img {
+  width: 30px; /* Adjust based on your SVG size */
+}
+
+.attribution {
+  font-size: 11px;
+  text-align: center;
+  position: absolute;
+  bottom: 1rem;
+}
+
+.attribution a {
+  color: var(--purple-500);
+}
+
+@media (max-width: 600px) {
+  .input-row {
+    gap: 1.2rem;
+  }
+  .input-group label {
+    font-size: 1.2rem;
+  }
+  input {
+    padding: 0.8rem 1rem;
+    font-size: 1.4rem;
+  }
+  .divider-container {
+    display: flex;
+    justify-content: center; /* Move button to center */
+    position: relative;
+  }
+
+  .line {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    z-index: 1; /* Line stays behind the button */
+    border-top: 2px solid #dbdbdb; /* Light grey color from design */
+  }
+
+  .submit-btn {
+    width: 64px; /* Slightly smaller button for mobile */
+    height: 64px;
+    z-index: 2;
+  }
+  /* 1. Adjust the Container */
+  .form-container {
+    padding: 4rem 2.4rem; /* Less side padding on small screens */
+    border-radius: 2rem 2rem 10rem 2rem; /* Reduce the bottom-right curve */
+  }
+
+  /* 2. Tighten the Input Row */
+  .input-row {
+    gap: 1.6rem;
+    margin-bottom: 0; /* Let the divider-container handle spacing */
+  }
+
+  /* 3. CENTER THE BUTTON */
+  .divider-container {
+    justify-content: center; /* Centers the button horizontally */
+    margin: 2rem 0; /* Increase space because button is now centered on the line */
+  }
+
+  .submit-btn {
+    position: static; /* Removes the "right: 0" from desktop */
+    width: 6.4rem;
+    height: 6.4rem;
+  }
+
+  .submit-btn img {
+    width: 2.4rem; /* Scale down the icon slightly */
+  }
+  #results h1 {
+    font-size: 4.8rem;
+    line-height: 1; /* Tighten line height to keep it compact */
+  }
+}
+
+@media (max-width: 375px) {
+  .form-container {
+    padding: 4rem 1.5rem; /* Further reduce padding to save horizontal space */
+  }
+
+  .input-row {
+    gap: 0.8rem; /* Minimal gap between inputs */
+  }
+
+  .input-group {
+    /* Allow inputs to shrink but keep them proportional */
+    flex: 1;
+  }
+
+  input {
+    padding: 1rem 0.8rem; /* Narrower internal padding */
+    font-size: 1.6rem; /* Ensure the 4-digit year fits */
+  }
+}
