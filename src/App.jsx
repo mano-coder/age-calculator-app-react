@@ -10,29 +10,58 @@ function App() {
     months: "--",
     days: "--",
   });
+  const [errors, setErrors] = useState({ day: "", month: "", year: "" });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!day || !month || !year) return;
+    let localErrors = { day: "", month: "", year: "" };
+    let isValid = true;
 
-    const birthDate = new Date(`${year}-${month}-${day}`);
-    const today = new Date();
-
-    let years = today.getFullYear() - birthDate.getFullYear();
-    let months = today.getMonth() - birthDate.getMonth();
-    let days = today.getDate() - birthDate.getDate();
-
-    // Adjustment logic for negative days/months
-    if (days < 0) {
-      months--;
-      days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+    if (!day) {
+      localErrors.day = "This field is required";
+      isValid = false;
+    } else if ((day < 1) | (day > 31)) {
+      localErrors.day = "Must be a valid day";
+      isValid = false;
     }
-    if (months < 0) {
-      years--;
-      months += 12;
+
+    if (!month) {
+      localErrors.month = "This field is required";
+      isValid = false;
+    } else if (month < 1 || month > 12) {
+      localErrors.month = "Must be a valid month";
+      isValid = false;
     }
-    // Save the calculation to state
-    setResults({ years, months, days });
+    if (!year) {
+      localErrors.year = "This field is required";
+      isValid = false;
+    } else if (year > new Date().getFullYear()) {
+      localErrors.year = "Must be a valid year";
+      isValid = false;
+    }
+    setErrors(localErrors);
+    if (isValid) {
+      if (!day || !month || !year) return;
+
+      const birthDate = new Date(`${year}-${month}-${day}`);
+      const today = new Date();
+
+      let years = today.getFullYear() - birthDate.getFullYear();
+      let months = today.getMonth() - birthDate.getMonth();
+      let days = today.getDate() - birthDate.getDate();
+
+      // Adjustment logic for negative days/months
+      if (days < 0) {
+        months--;
+        days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+      }
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+      // Save the calculation to state
+      setResults({ years, months, days });
+    }
   };
 
   return (
